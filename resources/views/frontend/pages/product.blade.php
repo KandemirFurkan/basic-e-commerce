@@ -16,7 +16,12 @@
 
 
                 <div class="col-md-6">
-                    <img src="{{ asset($Products->image) }}" alt="Image" class="img-fluid">
+
+                    @php
+                    $images = collect($Products->images->data ?? '');
+                    @endphp
+                    <img src="{{asset($images->sortByDesc('vitrin')->first()['image'] ?? 'img/resimyok.png')}}" alt="{{$images->sortByDesc('vitrin')->first()['alt'] ?? ''}}"   class="img-fluid"></img>
+
                 </div>
                 <div class="col-md-6">
                     <h2 class="text-black">{{ $Products->name ?? '' }}</h2>
@@ -105,8 +110,12 @@
                                 <div class="item">
                                     <div class="block-4 text-center">
                                         <figure class="block-4-image">
-                                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
-                                                class="img-fluid">
+
+                                            @php
+                                            $images2 = collect($item->images->data ?? '');
+                                            @endphp
+                                            <img src="{{asset($images2->sortByDesc('vitrin')->first()['image'] ?? 'img/resimyok.png')}}" alt="{{$images2->sortByDesc('vitrin')->first()['alt'] ?? ''}}"   class="img-fluid"></img>
+
                                         </figure>
                                         <div class="block-4-text p-4">
                                             <h3><a href="{{ route('urundetay', $item->slug) }}">{{ $item->name }}</a>

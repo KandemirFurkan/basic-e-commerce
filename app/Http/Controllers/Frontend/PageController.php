@@ -87,7 +87,7 @@ class PageController extends Controller
                 $q->where('slug',$slug);
             }
             return $q;
-        })->orderBy($order,$sort)->paginate(21);
+        })->with('images')->orderBy($order,$sort)->paginate(21);
 
         if($request->ajax()) {
             $view= view('frontend.ajax.productList',compact('Products'))->render();
@@ -132,12 +132,13 @@ class PageController extends Controller
     }
 
     public function urundetay($slug){
-        $Products= Product::where('slug',$slug)->where('status','1')->firstOrFail();
+        $Products= Product::where('slug',$slug)->where('status','1')->with('images')->firstOrFail();
 
         $ProductsL = Product::where('id','!=',$Products->id)
         ->where('category_id',$Products->category_id)
         ->where('status','1')
         ->limit(6)
+        ->with('images')
         ->orderBy('id','desc')
         ->get();
 

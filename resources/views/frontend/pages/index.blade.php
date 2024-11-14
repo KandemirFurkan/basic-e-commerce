@@ -65,7 +65,15 @@
             <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
                 <a class="block-2-item" href="{{url($category->slug)}}">
                   <figure class="image">
-                    <img src="{{asset($category->image)}}" alt="" class="img-fluid">
+
+
+                    @php
+                    $images = collect($category->images->data ?? '');
+                    @endphp
+                    <img src="{{asset($images->sortByDesc('vitrin')->first()['image'] ?? 'img/resimyok.png')}}" alt="{{$images->sortByDesc('vitrin')->first()['alt'] ?? ''}}"   class="img-fluid"></img>
+
+
+
                   </figure>
                   <div class="text">
                     <span class="text-uppercase">Giyim</span>
@@ -102,7 +110,14 @@
 <div class="item">
     <div class="block-4 text-center">
       <figure class="block-4-image">
-        <img  style="max-height: 350px" src="{{asset($item->image)}}" alt="Image placeholder" class="img-fluid">
+
+        @php
+        $images2 = collect($item->images->data ?? '');
+        @endphp
+        <img src="{{asset($images2->sortByDesc('vitrin')->first()['image'] ?? 'img/resimyok.png')}}" alt="{{$images2->sortByDesc('vitrin')->first()['alt'] ?? ''}}"   class="img-fluid"></img>
+
+
+
       </figure>
       <div class="block-4-text p-4">
         <h3><a href="#">{{$item->name}}</a></h3>

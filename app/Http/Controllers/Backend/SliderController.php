@@ -20,7 +20,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-      $sliders=  Slider::all();
+      $sliders=  Slider::with('images')->get();
        return view('backend.pages.slider.index',compact('sliders'));
     }
 
