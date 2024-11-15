@@ -18,18 +18,7 @@ return view('backend.pages.about.index',compact('about'));
     }
 
     public function update(Request $request,$id=1 ) {
-/*
-       if($request->hasFile('image')){
-            $resim=$request->file('image');
-            $uzanti=$resim->getClientOriginalExtension();
-            $dosyaadi=time().'_'.Str::slug($request->name);
-            $yukseklasor='img/about/';
 
-             $resimurl = resimyukle($resim,$dosyaadi,$yukseklasor);
-
-            }
-
-*/
 
 
         $about=    About::where('id',$id)->first();
@@ -39,7 +28,6 @@ About::updateOrCreate(
 
 
 
-        'image'=>$resimurl ?? $about->image,
         'name'=>$request->name,
         'content'=>$request->content,
         'text_1_icon'=>$request->text_1_icon,

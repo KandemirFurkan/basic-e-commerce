@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use ImageResize;
 use App\Models\Slider;
+use App\Models\ImageMedia;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SliderRequest;
-use ImageResize;
 
 
 
@@ -39,17 +40,7 @@ class SliderController extends Controller
     public function store(SliderRequest $request)
     {
 
-/*
-if($request->hasFile('image')){
-$resim=$request->file('image');
-$uzanti=$resim->getClientOriginalExtension();
-$dosyaadi=time().'_'.Str::slug($request->name);
-$yukseklasor='img/slider/';
 
- $resimurl = resimyukle($resim,$dosyaadi,$yukseklasor);
-
-}
-*/
 
 $Slider= Slider::create([
     'image'=>$resimurl,
@@ -57,7 +48,7 @@ $Slider= Slider::create([
     'content'=>$request->content,
     'seo'=>$request->seo,
     'status'=>$request->status,
-'image'=>$resimurl ?? '',
+
 
 
 ]);
@@ -108,7 +99,6 @@ return back()->withSuccess('Başarıyla Oluşturuldu!');
                 'content'=>$request->content,
                 'seo'=>$request->seo,
                 'status'=>$request->status,
-            'image'=>$resimurl ?? $slider->image,
 
 
     ]);
@@ -129,7 +119,15 @@ if($request->hasFile('image')) {
 
         $slider=  Slider::where('id',$request->id)->firstOrFail();
 
-dosyasil($slider->image);
+        $imageMedia = ImageMedia::where('model_name', 'Slider')->where('table_id', $slider->id)->first();
+
+        if (!empty($imageMedia->data)) {
+            foreach ($imageMedia->data as $img) {
+                dosyasil($img['image']);
+            }
+        }
+        $imageMedia->delete();
+
 $slider->delete();
 
 return response(['error'=>false,'message'=>'Başarıyla Silindi!']);

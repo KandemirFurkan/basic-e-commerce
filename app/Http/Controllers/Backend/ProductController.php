@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ImageMedia;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,17 +34,7 @@ class ProductController extends Controller
     */
     public function store(ProductRequest $request)
     {
-/*
-        if($request->hasFile('image')){
-            $resim=$request->file('image');
-            $uzanti=$resim->getClientOriginalExtension();
-            $dosyaadi=time().'_'.Str::slug($request->name);
-            $yukseklasor='img/urun/';
-            klasorac($yukseklasor);
-            $resimurl = resimyukle($resim,$dosyaadi,$yukseklasor);
 
-        }
-*/
 
 
 
@@ -58,7 +49,7 @@ class ProductController extends Controller
             'kdv'=>$request->kdv,
             'price'=>$request->price,
             'short_text'=>$request->short_text,
-            'image'=>$resimurl ?? NULL,
+
 
 
         ]);
@@ -140,8 +131,15 @@ class ProductController extends Controller
     {
 
         $product=  Product::where('id',$request->id)->firstOrFail();
+        $imageMedia = ImageMedia::where('model_name', 'Product')->where('table_id', $product->id)->first();
 
-        dosyasil($product->image);
+        if (!empty($imageMedia->data)) {
+            foreach ($imageMedia->data as $img) {
+                dosyasil($img['image']);
+            }
+            $imageMedia->delete();
+        }
+
         $product->delete();
 
         return response(['error'=>false,'message'=>'Başarıyla Silindi!']);

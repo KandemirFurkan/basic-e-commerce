@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ContactController;
+use App\Http\Controllers\Backend\PageSeoController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -67,7 +68,16 @@ Route::group(['middleware'=> ['panelsetting','auth'],'prefix'=>'panel','as'=>'pa
     Route::delete('/image-gorsel/destroy', [ImageUploadController::class,'destroy'])->name('image.resimSil');
 
 
+        /*Seo Settings*/
+        Route::get('/pageseo', [PageSeoController::class,'index'])->name('pageseo.index');
+        Route::get('/pageseo/create', [PageSeoController::class,'create'])->name('pageseo.create');
+        Route::post('/pageseo/store', [PageSeoController::class,'store'])->name('pageseo.store');
+        Route::get('/pageseo/{id}/edit', [PageSeoController::class,'edit'])->name('pageseo.edit');
+        Route::put('/pageseo/{id}/update', [PageSeoController::class,'update'])->name('pageseo.update');
+        Route::delete('/pageseo/destroy', [PageSeoController::class,'destroy'])->name('pageseo.destroy');
+
 });
+
 
 
 
