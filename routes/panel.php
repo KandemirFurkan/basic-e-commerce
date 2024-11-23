@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\PageSeoController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ImageSeoController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ImageUploadController;
 
@@ -51,12 +52,12 @@ Route::group(['middleware'=> ['panelsetting','auth'],'prefix'=>'panel','as'=>'pa
     Route::put('/setting/{id}/update', [SettingController::class,'update'])->name('setting.update');
     Route::delete('/setting/destroy', [SettingController::class,'destroy'])->name('setting.destroy');
 
-     /*Product */
-     Route::resource('/product', ProductController::class)->except('destroy');
-     Route::delete('/product/destroy', [ProductController::class,'destroy'])->name('product.destroy');
-     Route::post('/product-durum/update', [ProductController::class,'status'])->name('product.status');
+    /*Product */
+    Route::resource('/product', ProductController::class)->except('destroy');
+    Route::delete('/product/destroy', [ProductController::class,'destroy'])->name('product.destroy');
+    Route::post('/product-durum/update', [ProductController::class,'status'])->name('product.status');
 
-         /*Order */
+    /*Order */
     Route::get('/order', [OrderController::class,'index'])->name('order.index');
     Route::get('/order/{id}/edit', [OrderController::class,'edit'])->name('order.edit');
     Route::put('/order/{id}/update', [OrderController::class,'update'])->name('order.update');
@@ -68,13 +69,22 @@ Route::group(['middleware'=> ['panelsetting','auth'],'prefix'=>'panel','as'=>'pa
     Route::delete('/image-gorsel/destroy', [ImageUploadController::class,'destroy'])->name('image.resimSil');
 
 
-        /*Seo Settings*/
-        Route::get('/pageseo', [PageSeoController::class,'index'])->name('pageseo.index');
-        Route::get('/pageseo/create', [PageSeoController::class,'create'])->name('pageseo.create');
-        Route::post('/pageseo/store', [PageSeoController::class,'store'])->name('pageseo.store');
-        Route::get('/pageseo/{id}/edit', [PageSeoController::class,'edit'])->name('pageseo.edit');
-        Route::put('/pageseo/{id}/update', [PageSeoController::class,'update'])->name('pageseo.update');
-        Route::delete('/pageseo/destroy', [PageSeoController::class,'destroy'])->name('pageseo.destroy');
+    /*Seo Settings*/
+    Route::get('/pageseo', [PageSeoController::class,'index'])->name('pageseo.index');
+    Route::get('/pageseo/create', [PageSeoController::class,'create'])->name('pageseo.create');
+    Route::post('/pageseo/store', [PageSeoController::class,'store'])->name('pageseo.store');
+    Route::get('/pageseo/{id}/edit', [PageSeoController::class,'edit'])->name('pageseo.edit');
+    Route::put('/pageseo/{id}/update', [PageSeoController::class,'update'])->name('pageseo.update');
+    Route::delete('/pageseo/destroy', [PageSeoController::class,'destroy'])->name('pageseo.destroy');
+
+
+    /*Image Seo*/
+    Route::get('/imageseo', [ImageSeoController::class,'index'])->name('imageseo.index');
+    Route::delete('/imageseo/destroy', [ImageSeoController::class,'destroy'])->name('imageseo.destroy');
+    Route::post('/imageseo/update', [ImageSeoController::class,'update'])->name('imageseo.update');
+
+
+
 
 });
 

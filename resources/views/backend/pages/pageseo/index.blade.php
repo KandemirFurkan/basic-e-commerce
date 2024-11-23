@@ -6,7 +6,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Slider</h4>
+          <h4 class="card-title">Page Seo</h4>
           <p class="card-description">
 <a class="btn btn-primary" href="{{route('panel.pageseo.create');}}">Yeni Oluştur</a>
           </p>
