@@ -154,7 +154,7 @@
             <h2><a href="#">{{$Settings['kampamya_title']}}</a></h2>
 
             <p>{{$Settings['kampamya_text']}}</p>
-            <p><a href="{{route('urunler')}}" class="btn btn-primary btn-sm">İndirimdeki Ürünler</a></p>
+            <p><a href="{{route('tumurunlerindirim')}}" class="btn btn-primary btn-sm">İndirimdeki Ürünler</a></p>
           </div>
         </div>
       </div>
