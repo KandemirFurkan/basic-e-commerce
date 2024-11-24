@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
    protected $fillable=['order_no','product_id','name','price','qty','kdv'];
+
+
+public function product(){
+
+return $this->hasOne(Product::class,'id','product_id');
+
+}
+
 }
