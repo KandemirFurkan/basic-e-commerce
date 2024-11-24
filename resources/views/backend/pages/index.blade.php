@@ -147,6 +147,45 @@
 
 </div>
 
+<div class="row">
+    <div class="col-md-12 grid-margin transparent">
+      <div class="row">
+          <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  @section('customjs')
+  <script>
+      const ctx = document.getElementById('myChart');
+
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow'],
+          datasets: [{
+            label: 'En Çok Satın Alınanlar',
+            data: [12, 19, 3],
+            borderWidth: 2,
+            backgroundColor: [
+  'rgba(22, 22, 111)',
+  'rgba(33, 5, 22)',
+  'rgba(11, 192, 55)'
+            ],
+            borderColor: 'rgba(75, 192, 192, 1)',
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+
+  @endsection
 
 
 
