@@ -246,7 +246,7 @@
   <script src="{{asset('backend')}}/js/bootstrap-toggle.min.js"></script>
 
   <script src="{{asset('backend')}}/js/alertify.min.js"></script>
-
+  <script src="{{asset('backend')}}/js/chart.js"></script>
 
 @yield('customjs')
 

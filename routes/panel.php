@@ -94,6 +94,9 @@ Route::group(['middleware'=> ['panelsetting','auth'],'prefix'=>'panel','as'=>'pa
     Route::post('/coupons-durum/update', [CouponController::class,'status'])->name('coupons.status');
 
 
+/*Chart */
+    Route::get('/chart', [DashboardController::class,'orderchart'])->name('order.chart');
+
 });
 
 
