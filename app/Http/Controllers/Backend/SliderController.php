@@ -42,25 +42,19 @@ class SliderController extends Controller
 
 
 
-$Slider= Slider::create([
-    'image'=>$resimurl,
-    'name'=>$request->name,
-    'content'=>$request->content,
-    'seo'=>$request->seo,
-    'status'=>$request->status,
+        $Slider =  Slider::create([
+            'name'=>$request->name,
+            'link'=>$request->link,
+            'content'=>$request->content,
+            'status'=>$request->status,
+        ]);
+
+        if ($request->hasFile('image')) {
+            $this->fileSave('Slider', 'slider', $request, $Slider);
+        }
 
 
-
-]);
-
-
-if($request->hasFile('image')) {
-
-    $this->fileSave('Slider','slider',$request,$Slider);
-
-    }
-
-return back()->withSuccess('Başarıyla Oluşturuldu!');
+        return back()->withSuccess('Başarıyla Oluşturuldu!');
 
     }
 
@@ -87,12 +81,7 @@ return back()->withSuccess('Başarıyla Oluşturuldu!');
     public function update(Request $request, string $id)
     {
 
-
-
-
                 $slider=  Slider::where('id',$id)->firstOrFail();
-
-
 
             $slider->update([
                 'name'=>$request->name,

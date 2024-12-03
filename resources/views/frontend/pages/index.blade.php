@@ -1,9 +1,11 @@
 @extends('frontend.layout.layout')
 @section('content')
 
+@php
+$images3 = collect($slider->images->data ?? '');
+@endphp
 
-
-    <div class="site-blocks-cover" style="background-image: url({{asset($slider->image ?? '')}});" data-aos="fade">
+    <div class="site-blocks-cover" style="background-image: url({{asset($images3->sortByDesc('vitrin')->first()['image'] ?? 'img/resimyok.png')}});" data-aos="fade">
       <div class="container">
         <div class="row align-items-start align-items-md-center justify-content-end">
           <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
