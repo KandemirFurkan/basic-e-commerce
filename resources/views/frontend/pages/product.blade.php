@@ -24,7 +24,7 @@
 
                 </div>
                 <div class="col-md-6">
-                    <h2 class="text-black">{{ $Products->name ?? '' }}</h2>
+                    <h2 class="text-black">{{ $Products->name ?? '' }}</h2> <small>{{$pageViewCount}}</small>
                     <p> {!! $Products->content ?? '' !!}</p>
 
                     <p><strong class="text-primary h4">{{ number_format($Products->price, 2) ?? '' }}</strong></p>

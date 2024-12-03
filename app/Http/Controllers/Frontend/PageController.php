@@ -134,6 +134,13 @@ class PageController extends Controller
     public function urundetay($slug){
         $Products= Product::where('slug',$slug)->where('status','1')->with('images')->firstOrFail();
 
+        $expiresAt = now()->addMinutes(1);
+views($Products)
+->cooldown($expiresAt)
+->record();
+
+$pageViewCount=views($Products)->count();
+
         $ProductsL = Product::where('id','!=',$Products->id)
         ->where('category_id',$Products->category_id)
         ->where('status','1')
@@ -177,7 +184,7 @@ class PageController extends Controller
         ];
 
 
-        return view('frontend.pages.product',compact('seo','Products','ProductsL','breadcrumb'));
+        return view('frontend.pages.product',compact('seo','Products','ProductsL','breadcrumb','pageViewCount'));
     }
     public function hakkimizda(){
         $About=  About::where('id',1)->first();

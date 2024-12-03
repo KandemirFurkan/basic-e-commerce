@@ -6,9 +6,13 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class Product extends Model
+
+class Product extends Model implements Viewable
 {
+    use InteractsWithViews;
      use Sluggable,HasFactory;
    protected $fillable=[
 
