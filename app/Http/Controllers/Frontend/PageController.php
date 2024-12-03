@@ -30,12 +30,12 @@ class PageController extends Controller
         $anakategori = null;
         $altkategori = null;
         if(!empty($category) && empty($slug)) {
-              $anakategori = Category::where('slug',$category)->first();
-              $categorySlug = $anakategori->slug ?? '';
+            $anakategori = Category::where('slug',$category)->first();
+            $categorySlug = $anakategori->slug ?? '';
         }else if (!empty($category) && !empty($slug)){
-             $anakategori = Category::where('slug',$category)->first();
-             $altkategori = Category::where('slug',$slug)->first();
-             $categorySlug = $altkategori->slug ?? '';
+            $anakategori = Category::where('slug',$category)->first();
+            $altkategori = Category::where('slug',$slug)->first();
+            $categorySlug = $altkategori->slug ?? '';
         }
 
 
@@ -82,9 +82,9 @@ class PageController extends Controller
             return $q;
         })
         ->with('category:id,name,slug')
-        ->whereHas('category',function($q) use($slug){
-            if(!empty ($slug))   {
-                $q->where('slug',$slug);
+        ->whereHas('category',function($q) use($categorySlug){
+            if(!empty ($categorySlug))   {
+                $q->where('slug',$categorySlug);
             }
             return $q;
         })->with('images')->orderBy($order,$sort)->paginate(21);
@@ -150,7 +150,7 @@ class PageController extends Controller
             'sayfalar' => [
 
             ],
-           'active'=> $Products->name,
+            'active'=> $Products->name,
         ];
 
 
