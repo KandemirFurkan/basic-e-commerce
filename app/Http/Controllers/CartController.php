@@ -123,19 +123,28 @@ class CartController extends Controller
         }
 
 
-        if(array_key_exists($productID,$cartItem)){
-            $cartItem[$productID]['qty'] += $qty;
+        $sizeExists = false;
+
+        foreach ($cartItem as $key => $item) {
+            if ($item['productID'] == $productID && $item['size'] == $size) {
+                $cartItem[$key]['qty'] += $qty;
+                $sizeExists = true;
+                break;
+            }
         }
-        else {
-            $cartItem[$productID]= [
-'image' =>$urun -> image,
-'name' =>$urun -> name,
-'price' =>$urun->price * $kuponprice,
-'qty' =>$qty,
-'size' =>$size,
-'kdv' =>$urun->kdv,
+
+        if (!$sizeExists) {
+            $cartItem[] = [
+                'productID' => $productID,
+                'image' => $urun->image,
+                'name' => $urun->name,
+                'price' => $urun->price / $kuponprice,
+                'qty' => $qty,
+                'kdv' => $urun->kdv,
+                'size' => $size,
             ];
         }
+
 
         session(['cart'=>$cartItem]);
 

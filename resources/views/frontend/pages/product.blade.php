@@ -30,7 +30,7 @@
                     <p><strong class="text-primary h4">{{ number_format($Products->price, 2) ?? '' }}</strong></p>
                     <form method="POST" action="{{ route('sepet.add') }}">
                         @csrf
-                        <input type="hidden" name="product_id" value="{{ $Products->id }}">
+                        <input type="hidden" name="product_id" value="{{sifrele($Products->id)}}">
                         <div class="mb-1 d-flex">
 
                             <label for="option-xs" class="d-flex mr-3 mb-3">
