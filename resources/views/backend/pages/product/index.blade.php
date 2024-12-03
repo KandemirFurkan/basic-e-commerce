@@ -10,6 +10,7 @@
           <p class="card-description">
 <a class="btn btn-primary" href="{{route('panel.product.create');}}">Yeni</a>
 <a class="btn btn-primary" href="{{route('panel.product.export');}}">Dışa Aktar(Excel)</a>
+<a class="btn btn-primary" href="{{route('panel.product.import');}}">İçe Aktar(Excel)</a>
           </p>
           @if (session()->get('success'))
           <div class="alert alert-success">
