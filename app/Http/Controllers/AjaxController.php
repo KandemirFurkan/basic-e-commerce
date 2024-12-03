@@ -27,22 +27,8 @@ $newdata=[
 
 $sonkaydedilen= Contact::create($data);
 
-return back()->withSuccess('Başarıyla Gönderildi');
-/*
-$data=[
-'name'=>Str::title($request->name),
-'email'=>$request->name,
-'subject'=>$request->subject,
-'message'=>$request->message,
+return response()->json(['error'=>false,'message'=>'Başarıyla Gönderildi']);
 
-];
-
-
-       $LastData= Contact::create($data);
-
-return back()->with(['message'=>'Başarıyla gönderildi','errors'=>$valiData]);
-
-*/
     }
 
 public function logout(){
