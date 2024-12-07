@@ -173,6 +173,6 @@ return Excel::download(new ProductExport, 'products.xlsx');
 
           Excel::import(new ProductImport, $file);
 
-        return redirect()->back()->with('success', 'Excel İmportlandı!');
+        return redirect()->back()->with('success', 'Excel Aktarımı Tamamlandı!');
     }
 }
